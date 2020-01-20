@@ -222,8 +222,8 @@ RiskParity <- function(Local_Returns, Lookback = 6) {
                                       verbose = T,
                                       rebalance_on = "months")
   
-  charts.PerformanceSummary(Port_RiskParity$returns, main = "Risk Parity")
-  print(SummaryStats(Port_RiskParity$returns))
+  # charts.PerformanceSummary(Port_RiskParity$returns, main = "Risk Parity")
+  # print(SummaryStats(Port_RiskParity$returns))
   
   return(Port_RiskParity)
 }
@@ -273,8 +273,8 @@ Momentum_TopN <- function(Local_Returns, Lookback = 6, Freq = "months",N = 3) {
   Port_Momentum_TopN <- Return.portfolio(R = Local_Returns[paste0(start(Momentum_Weights),"/")],
                                          weights = Momentum_Weights, verbose = T, rebalance_on = "months")
   
-  charts.PerformanceSummary(Port_Momentum_TopN$returns, main = "Momentum")
-  print(SummaryStats(Port_Momentum_TopN$returns))
+  # charts.PerformanceSummary(Port_Momentum_TopN$returns, main = "Momentum")
+  # print(SummaryStats(Port_Momentum_TopN$returns))
   
   return(Port_Momentum_TopN)
 }
@@ -323,9 +323,9 @@ Sharpe_TopN <- function(Local_Returns, Lookback = 6, Freq = "months",N = 3) {
   Port_Sharpe <- Return.portfolio(R = Local_Returns[paste0(start(Sharpe_Weights),"/")],
                                   weights = Sharpe_Weights, verbose = T, rebalance_on = "months")
   
-  charts.PerformanceSummary(Port_Sharpe$returns, main = "Sharpe")
-  print(SummaryStats(Port_Sharpe$returns))
-  print(paste0("Contribution: ",apply(Port_Sharpe$contribution, 2, sum)))
+  # charts.PerformanceSummary(Port_Sharpe$returns, main = "Sharpe")
+  # print(SummaryStats(Port_Sharpe$returns))
+  # print(paste0("Contribution: ",apply(Port_Sharpe$contribution, 2, sum)))
   return(Port_Sharpe)
 }
 
@@ -383,19 +383,19 @@ Semi_Variance_Weighted <- function(Local_Returns, Lookback = 6, Freq = "months")
   apply(Port_Semi$contribution,2,sum)
   
   Port <- Port_Semi
-  print("Summary Stats:")
-  print(SummaryStats(Port_Semi$returns))
-  print("Contribution:")
-  print(apply(Port_Semi$contribution, 2, function(s) sum(s, na.rm = T)))
-  print("Average Weight:")
-  print(apply(Port_Semi$BOP.Weight, 2, function(s) mean(s, na.rm = T)))
-  print("SD Weight:")
-  print(apply(Port_Semi$BOP.Weight, 2, function(s) sd(s, na.rm = T)))
-  print("Risk adjusted contribution:")
-  print(apply(Port_Semi$contribution, 2, function(c) {
-    mean(c, na.rm = T) / sd(c, na.rm = T)
-  }))
-  
+  # print("Summary Stats:")
+  # print(SummaryStats(Port_Semi$returns))
+  # print("Contribution:")
+  # print(apply(Port_Semi$contribution, 2, function(s) sum(s, na.rm = T)))
+  # print("Average Weight:")
+  # print(apply(Port_Semi$BOP.Weight, 2, function(s) mean(s, na.rm = T)))
+  # print("SD Weight:")
+  # print(apply(Port_Semi$BOP.Weight, 2, function(s) sd(s, na.rm = T)))
+  # print("Risk adjusted contribution:")
+  # print(apply(Port_Semi$contribution, 2, function(c) {
+  #   mean(c, na.rm = T) / sd(c, na.rm = T)
+  # }))
+  # 
   beginWeights <- Port$BOP.Weight[endpoints(Port$BOP.Weight, on = "months"),]
   endWeights <- Port$EOP.Weight[endpoints(Port$EOP.Weight, on = "months"),]
 
@@ -559,29 +559,29 @@ Volatility_Crash <- function(Local_Returns, Lookback = 6, Freq = "months") {
   
   charts.PerformanceSummary(Port_InverseVol_Crash$returns, main = "Inverse Vol Crash")
   
-  Port <- Port_InverseVol_Crash
-  print("Summary Stats:")
-  print(SummaryStats(Port$returns))
-  print("Contribution:")
-  print(apply(Port$contribution, 2, sum))
-  print("Average Weight:")
-  print(apply(Port$BOP.Weight, 2, mean))
-  print("SD Weight:")
-  print(apply(Port$BOP.Weight, 2, sd))
-  print("Risk adjusted contribution:")
-  print(apply(Port$contribution, 2, function(c) {
-    mean(c, na.rm = T) / sd(c, na.rm = T)
-  }))
-  # write.xlsx(x = data.frame(Date = index(Port_Inverse_Vol_Crash$BOP.Weight), coredata(Port_Inverse_Vol_Crash$BOP.Weight)),
-  #            file = "Inverse_Vol_Crash.xlsx",sheetName = "BOP_Weight")
-  # write.xlsx(x = data.frame(Date = index(Port_Inverse_Vol_Crash$EOP.Weight), coredata(Port_Inverse_Vol_Crash$EOP.Weight)),
-  #            file = "Inverse_Vol_Crash.xlsx",sheetName = "EOP_Weight",append = T)
+  # Port <- Port_InverseVol_Crash
+  # print("Summary Stats:")
+  # print(SummaryStats(Port$returns))
+  # print("Contribution:")
+  # print(apply(Port$contribution, 2, sum))
+  # print("Average Weight:")
+  # print(apply(Port$BOP.Weight, 2, mean))
+  # print("SD Weight:")
+  # print(apply(Port$BOP.Weight, 2, sd))
+  # print("Risk adjusted contribution:")
+  # print(apply(Port$contribution, 2, function(c) {
+  #   mean(c, na.rm = T) / sd(c, na.rm = T)
+  # }))
+  # # write.xlsx(x = data.frame(Date = index(Port_Inverse_Vol_Crash$BOP.Weight), coredata(Port_Inverse_Vol_Crash$BOP.Weight)),
+  # #            file = "Inverse_Vol_Crash.xlsx",sheetName = "BOP_Weight")
+  # # write.xlsx(x = data.frame(Date = index(Port_Inverse_Vol_Crash$EOP.Weight), coredata(Port_Inverse_Vol_Crash$EOP.Weight)),
+  # #            file = "Inverse_Vol_Crash.xlsx",sheetName = "EOP_Weight",append = T)
+  # # 
+  # Weight_long <- gather(data.frame(Date = index(Port$BOP.Weight), coredata(Port$BOP.Weight)),key = "Ticker",value = "Weight",-Date)
+  # ggplot(data = Weight_long, aes(x=Date,y = Weight, fill = Ticker)) + geom_area()
   # 
-  Weight_long <- gather(data.frame(Date = index(Port$BOP.Weight), coredata(Port$BOP.Weight)),key = "Ticker",value = "Weight",-Date)
-  ggplot(data = Weight_long, aes(x=Date,y = Weight, fill = Ticker)) + geom_area()
-  
-  
-  print(tail(Rolling_Returns,1))
+  # 
+  # print(tail(Rolling_Returns,1))
   
   return(Port_InverseVol_Crash) 
 }
